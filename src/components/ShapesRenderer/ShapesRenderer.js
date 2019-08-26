@@ -1,25 +1,35 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 // eslint-disable-next-line no-unused-vars
 import styled from 'styled-components/macro';
-import { drawPoint } from './utils';
+import { drawPoint, getMissingPoint } from './utils';
 
 export const ShapesRenderer = () => {
   const canvasRef = useRef(null);
   const [points, setPoints] = useState([]);
 
-  const handleCanvasClick = e => {
+  const addPoint = point => setPoints(prevPoints => [...prevPoints, point]);
+
+  useEffect(() => {
+    if (points.length === 3) {
+      addPoint(getMissingPoint(points));
+      return;
+    }
+
     const { current: canvas } = canvasRef;
 
-    if (points.length < 3 && canvas && canvas.getContext) {
+    if (canvas && canvas.getContext) {
       const ctx = canvas.getContext('2d');
-      const point = {
+      ctx.clearRect(0, 0, window.innerHeight, window.innerWidth);
+      points.forEach(point => drawPoint(ctx, point));
+    }
+  }, [points]);
+
+  const handleCanvasClick = e => {
+    if (points.length < 3) {
+      addPoint({
         x: e.clientX,
         y: e.clientY
-      };
-
-      drawPoint(ctx, point);
-
-      setPoints(prevPoints => [...prevPoints, point]);
+      });
     }
   };
 
