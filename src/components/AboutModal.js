@@ -61,7 +61,7 @@ export const AboutModal = () => {
         <h2>How to use</h2>
         <p>
           Click on 3 arbitrary points in the window area (light gray area), then
-          you will see the shapes automatically rendered.{' '}
+          you will see the shapes automatically rendered.
         </p>
         <p>
           In the upper right corner, you can see the coordinates of the selected
@@ -72,6 +72,16 @@ export const AboutModal = () => {
         <p>
           Luis Contreras &lt;
           <a href="mailto:luiscon26@gmail.com">luiscon26@gmail.com</a>&gt;
+        </p>
+        <p>
+          Project repository:{' '}
+          <a
+            href="https://github.com/devrasec/quicksort-frontend-test"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            https://github.com/devrasec/quicksort-frontend-test
+          </a>
         </p>
       </Modal>
     </>
