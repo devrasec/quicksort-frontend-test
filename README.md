@@ -4,7 +4,7 @@
 
 This app renders two shapes after 3 arbitrary points are selected by the user in the window.
 
-The first shape is a blue parallelogram that uses the 3 selectedpoints as vertices,
+The first shape is a blue parallelogram that uses the 3 selected points as vertices,
 and the second shape is a yellow circle with the center point equal to the parallelogram's center
 of mass. The missing point of the parallelogram is rendered automatically. The circle has the
 same area of the parallelogram.
