@@ -76,6 +76,13 @@ export const ShapesRenderer = () => {
     <>
       <InfoBox>
         <PointsInfo points={points} />
+        {area > 0 && (
+          <div>
+            <strong>
+              Area: {area} units<sup>2</sup>
+            </strong>
+          </div>
+        )}
       </InfoBox>
       <canvas
         ref={canvasRef}

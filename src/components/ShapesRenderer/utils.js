@@ -43,7 +43,7 @@ export const drawParallelogram = (canvasCtx, points) => {
 export const getParallelogramArea = points => {
   const [a, b, c] = points;
   // Determinant of two adjacents sides of the parallelogram.
-  const determinant = [[a.x - b.x, a.y - b.y], [b.x - c.x, b.y - c.y]];
+  const determinant = [[b.x - a.x, b.y - a.y], [c.x - b.x, c.y - b.y]];
   // Cross product of the determinant is equal to the area.
   return Math.abs(
     determinant[0][0] * determinant[1][1] -
