@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 // eslint-disable-next-line no-unused-vars
 import styled from 'styled-components/macro';
 
@@ -13,6 +13,7 @@ import {
 } from './utils';
 import { PointsInfo } from '../PointsInfo';
 import { Button } from '../Button';
+import { AboutModal } from '../AboutModal';
 
 const InfoBox = styled.div`
   position: absolute;
@@ -31,7 +32,6 @@ export const ShapesRenderer = () => {
   const [area, setArea] = useState(0);
   const { current: canvas } = canvasRef;
   const isCanvasAvailable = canvas && canvas.getContext;
-
   const addPoint = point => setPoints(prevPoints => [...prevPoints, point]);
 
   useEffect(() => {
@@ -73,14 +73,14 @@ export const ShapesRenderer = () => {
     }
   };
 
-  const resetCanvas = useCallback(() => {
+  const resetCanvas = () => {
     if (isCanvasAvailable) {
       const ctx = canvas.getContext('2d');
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
       setArea(0);
       setPoints([]);
     }
-  }, [canvas, isCanvasAvailable]);
+  };
 
   return (
     <>
@@ -96,11 +96,13 @@ export const ShapesRenderer = () => {
         <Button
           css={`
             margin-top: 10px;
+            margin-right: 10px;
           `}
           onClick={resetCanvas}
         >
           Reset
         </Button>
+        <AboutModal />
       </InfoBox>
       <canvas
         ref={canvasRef}
