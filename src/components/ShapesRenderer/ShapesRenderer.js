@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 // eslint-disable-next-line no-unused-vars
 import styled from 'styled-components/macro';
+
 import {
   drawPoint,
   getMissingPoint,
@@ -10,6 +11,18 @@ import {
   getRadioByArea,
   getCenterCoords
 } from './utils';
+import { PointsInfo } from '../PointsInfo';
+
+const InfoBox = styled.div`
+  position: absolute;
+  z-index: 1;
+  background-color: rgba(0, 0, 255, 0.5);
+  padding: 16px;
+  width: 200px;
+  top: 0;
+  right: 0;
+  color: #ffffff;
+`;
 
 export const ShapesRenderer = () => {
   const canvasRef = useRef(null);
@@ -60,14 +73,20 @@ export const ShapesRenderer = () => {
   };
 
   return (
-    <canvas
-      ref={canvasRef}
-      css={`
-        display: block;
-      `}
-      width={window.innerWidth}
-      height={window.innerHeight}
-      onClick={handleCanvasClick}
-    />
+    <>
+      <InfoBox>
+        <PointsInfo points={points} />
+      </InfoBox>
+      <canvas
+        ref={canvasRef}
+        css={`
+          display: block;
+          background: #f1f1f1;
+        `}
+        width={window.innerWidth}
+        height={window.innerHeight}
+        onClick={handleCanvasClick}
+      />
+    </>
   );
 };
