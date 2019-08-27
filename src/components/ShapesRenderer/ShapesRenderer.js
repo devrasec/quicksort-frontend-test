@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 // eslint-disable-next-line no-unused-vars
 import styled from 'styled-components/macro';
 
@@ -12,6 +12,7 @@ import {
   getCenterCoords
 } from './utils';
 import { PointsInfo } from '../PointsInfo';
+import { Button } from '../Button';
 
 const InfoBox = styled.div`
   position: absolute;
@@ -41,7 +42,7 @@ export const ShapesRenderer = () => {
 
     if (isCanvasAvailable) {
       const ctx = canvas.getContext('2d');
-      ctx.clearRect(0, 0, window.innerHeight, window.innerWidth);
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
       points.forEach(point => drawPoint(ctx, point));
 
       if (points.length === 4) {
@@ -72,6 +73,15 @@ export const ShapesRenderer = () => {
     }
   };
 
+  const resetCanvas = useCallback(() => {
+    if (isCanvasAvailable) {
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      setArea(0);
+      setPoints([]);
+    }
+  }, [canvas, isCanvasAvailable]);
+
   return (
     <>
       <InfoBox>
@@ -83,6 +93,14 @@ export const ShapesRenderer = () => {
             </strong>
           </div>
         )}
+        <Button
+          css={`
+            margin-top: 10px;
+          `}
+          onClick={resetCanvas}
+        >
+          Reset
+        </Button>
       </InfoBox>
       <canvas
         ref={canvasRef}
